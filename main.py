@@ -8,11 +8,26 @@
 # Please, submit the result to a GitHub, GitLab, or Bitbucket repository and send us the URL within a timeframe of 72 hours. Once we receive this information we’ll ask our technical team to review it and we’ll let you know about the next steps of the process. 
 
 # Note: To develop this application you need to consider the past rules of the Pico&Placa. (Hours: 7:00am - 9:30am / 16:00pm - 19:30). Additional research would be needed to complete the exercise. 
-def run():
-    print("test")
 
-if __name__ == "__main__":
-    run()
+# def run():
+#     print("test")
 
 
+# if __name__ == "__main__":
+#     run()
 
+import datetime as dt
+from datetime import date
+import calendar
+
+def find_day(date):
+    try:
+        day, month, year = (int(i) for i in date.split('-'))   
+        today = dt.date(year, month, day)
+        return today.strftime("%A")
+    except ValueError as ve:
+        print("the format or value/s given is/are incorrect please use it like this (dd-mm-yyyy)")
+
+# Driver program
+date = '02-08-2004'
+print(find_day(date))
