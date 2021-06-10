@@ -73,7 +73,7 @@ def find_day(date):
         today = dt.date(year, month, day)
         return today.strftime("%A")
     except ValueError as ve:
-        return "the format or value/s given is/are incorrect please use it like this (dd-mm-yyyy)"
+        print("the format or value/s given is/are incorrect please use it like this (dd-mm-yyyy)")
         
 
 
@@ -147,7 +147,7 @@ def pico_y_placa(week):
             print("Pico & Placa is activated, you can't drive right now, remember not to do it on this hours (7:00am - 9:30am / 16:00pm - 19:30).")
             return 1
         else:
-            print("Pico y Placa is not activated at this time, but you have restriction today so remember not to drive on this hours (7:00am - 9:30am / 16:00pm).")
+            print("Pico y Placa is not activated at this time, but you have restriction today so remember not to drive on this hours (7:00am - 9:30am / 16:00pm - 19:30).")
             return 2
     else:
         print("Your car does not have Pico y Placa today, you may enjoy the highway at any time.")
