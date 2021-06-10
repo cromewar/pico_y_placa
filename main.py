@@ -41,9 +41,17 @@ def get_time(current_time):
     except ValueError as ve:
         print("Please enter a correct Time format HH:MM (ex: 09:30)")
 
+def check_plate(plate):
+    if len(plate) > 7 or len(plate) < 7:
+        print("wrong plate length, must the a 7 char plate with this format 'AAA0123'")
+        return 0
+    try:
+        last_digit = int(plate[-1])
+        return last_digit
+    except ValueError as ve:
+        print('The last value is not a number')
 
-    
-    
+
 
 
 if __name__ == "__main__":
@@ -59,5 +67,5 @@ if __name__ == "__main__":
         "Saturday": "Free to Go!",
         "Sunday": "Free to Go!"
     }
-
-    print(get_time('09:59'))
+    
+    
