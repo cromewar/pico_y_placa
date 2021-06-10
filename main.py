@@ -25,6 +25,7 @@ def find_day(date):
         return today.strftime("%A")
     except ValueError as ve:
         print("the format or value/s given is/are incorrect please use it like this (dd-mm-yyyy)")
+        
 
 
 
@@ -42,6 +43,9 @@ def get_time(current_time):
         print("Please enter a correct Time format HH:MM (ex: 09:30)")
 
 def check_plate(plate):
+    '''
+    Verifies the length of the plate and tries to return the last digit as an integer.
+    '''
     if len(plate) > 7 or len(plate) < 7:
         print("wrong plate length, must the a 7 char plate with this format 'AAA0123'")
         return 0
@@ -50,22 +54,56 @@ def check_plate(plate):
         return last_digit
     except ValueError as ve:
         print('The last value is not a number')
+    
+
+def _is_pico_y_placa_activated(hour, minutes):
+# Note: To develop this application you need to consider the past rules of the Pico&Placa. (Hours: 7:00am - 9:30am / 16:00pm - 19:30). Additional research would be needed to complete the exercise.  
+    if hour < 7:
+        return False
+    elif hour >= 19 and minutes > 30:
+        return False
+    elif hour == 9 and minutes > 30:
+        return False
+    elif hour > 9 and hour < 16:
+        return False
+    return True
+        
+    
+
+
+def _match_day_with_plate_number(day, week):
+    if day in week:
+        return week.get(day)
+    else:
+        return (10, 10)
+
+
+
+
+def pico_y_placa(plate, date, time, week):
+    plate_last_digit = check_plate(plate)
+    target_day = find_day(date)
+    hour, minutes = get_time(time)
+    pico_placa = _is_pico_y_placa_activated(hour, minutes)
+    number1, number2 = _match_day_with_plate_number(target_day)
+
+    
+
+
 
 
 
 
 if __name__ == "__main__":
     # All variables here
-    date = '02-08-2004'
+    date = '05-06-2021'
     plate = 'AAA0123'
+    time = '09:30'
     _week = {
         "Monday": (1,2),
         "Tuesday": (3,4),
         "Wednesday": (5,6),
         "Thursday": (7,8),
-        "Friday": (9,0),
-        "Saturday": "Free to Go!",
-        "Sunday": "Free to Go!"
+        "Friday": (9,0)
     }
-    
-    
+
