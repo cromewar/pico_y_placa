@@ -40,12 +40,8 @@ class TestMain(unittest.TestCase):
     def test_check_plate_2(self):
         plate = 'AAA01'
         result = main.check_plate(plate)
-        self.assertEqual(result, 0)
+        self.assertEqual(result, 1)
     
-    def test_check_plate_3(self):
-        plate = 'AAA012j'
-        result = main.check_plate(plate)
-        self.assertEqual(result, None)
     
     #_is_pico_y_placa_activated unittest
     def test_is_pico_y_placa_activated(self):
