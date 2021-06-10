@@ -9,18 +9,16 @@
 
 # Note: To develop this application you need to consider the past rules of the Pico&Placa. (Hours: 7:00am - 9:30am / 16:00pm - 19:30). Additional research would be needed to complete the exercise. 
 
-# def run():
-#     print("test")
-
-
-# if __name__ == "__main__":
-#     run()
-
 import datetime as dt
 from datetime import date
 import calendar
+import time
+
 
 def find_day(date):
+    '''
+    Info: splits the date into day, month and year creating a new datetime object and returning it's day name.
+    '''
     try:
         day, month, year = (int(i) for i in date.split('-'))   
         today = dt.date(year, month, day)
@@ -28,6 +26,38 @@ def find_day(date):
     except ValueError as ve:
         print("the format or value/s given is/are incorrect please use it like this (dd-mm-yyyy)")
 
-# Driver program
-date = '02-08-2004'
-print(find_day(date))
+
+
+def get_time(current_time):
+    '''
+    Info: Splits the time HH:MM given as an string input, verifies if it's a valid time using datetime library with strftime and returns the time as a tuple.
+    
+    '''
+    try:
+        hour, minutes = (int(i) for i in current_time.split(':'))
+        current = dt.time(hour, minutes)
+        current.strftime("%H:%M")
+        return (hour, minutes)
+    except ValueError as ve:
+        print("Please enter a correct Time format HH:MM (ex: 09:30)")
+
+
+    
+    
+
+
+if __name__ == "__main__":
+    # All variables here
+    date = '02-08-2004'
+    plate = 'AAA0123'
+    _week = {
+        "Monday": (1,2),
+        "Tuesday": (3,4),
+        "Wednesday": (5,6),
+        "Thursday": (7,8),
+        "Friday": (9,0),
+        "Saturday": "Free to Go!",
+        "Sunday": "Free to Go!"
+    }
+
+    print(get_time('09:59'))
