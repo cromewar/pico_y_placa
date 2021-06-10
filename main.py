@@ -60,9 +60,9 @@ def _is_pico_y_placa_activated(hour, minutes):
 # Note: To develop this application you need to consider the past rules of the Pico&Placa. (Hours: 7:00am - 9:30am / 16:00pm - 19:30). Additional research would be needed to complete the exercise.  
     if hour < 7:
         return False
-    elif hour >= 19 and minutes > 30:
+    elif hour >= 19 and minutes >= 30:
         return False
-    elif hour == 9 and minutes > 30:
+    elif hour == 9 and minutes >= 30:
         return False
     elif hour > 9 and hour < 16:
         return False
@@ -80,25 +80,37 @@ def _match_day_with_plate_number(day, week):
 
 
 
+
 def pico_y_placa(plate, date, time, week):
     plate_last_digit = check_plate(plate)
     target_day = find_day(date)
     hour, minutes = get_time(time)
     pico_placa = _is_pico_y_placa_activated(hour, minutes)
-    number1, number2 = _match_day_with_plate_number(target_day)
+    number1, number2 = _match_day_with_plate_number(target_day, week)
 
-    
-
+    print(plate_last_digit, target_day, hour, minutes, pico_placa, number1, number2)
+    print(f'Hello today is {date}, it\'s a good {target_day}, currently at {time} hours this is your Pico & Placa result for your license plate number {plate}:')
+    if plate_last_digit == number1 or plate_last_digit == number2:
+        if pico_placa:
+            print("Pico & Placa is activated, you can't drive right now, remember not to do it on this hours (7:00am - 9:30am / 16:00pm - 19:30)")
+            return 1
+        else:
+            print("Pico y Placa is not activated at this time, but you have restriction today so remember not to drive on this hours (7:00am - 9:30am / 16:00pm)")
+            return 2
+    else:
+        print("Your car does not have Pico y Placa today, you may enjoy the highway at any time,")
+        return 0
 
 
 
 
 
 if __name__ == "__main__":
+    print("Welcome to Pico & Placa Predictor, please take a moment to input the remaining data: ")
     # All variables here
-    date = '05-06-2021'
-    plate = 'AAA0123'
-    time = '09:30'
+    date = input("Please enter the date you want to check in this format DD-MM-YYYY (ex: 10-06-2021): \n")
+    plate = input("Now enter your plate number using this syntax AAA0123: \n")
+    time = input('Finally tell us, what time you want to check, use this format HH:MM (ex: 08:30): \n')
     _week = {
         "Monday": (1,2),
         "Tuesday": (3,4),
@@ -106,4 +118,6 @@ if __name__ == "__main__":
         "Thursday": (7,8),
         "Friday": (9,0)
     }
+
+    pico_y_placa(plate, date, time, _week)
 

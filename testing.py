@@ -71,6 +71,12 @@ class TestMain(unittest.TestCase):
         minutes = 1
         result = main._is_pico_y_placa_activated(hour, minutes)
         self.assertEqual(result, True)
+
+    def test_is_pico_y_placa_activated_5(self):
+        hour = 9
+        minutes = 29
+        result = main._is_pico_y_placa_activated(hour, minutes)
+        self.assertEqual(result, True)
     
 
 
